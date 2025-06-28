@@ -36,10 +36,8 @@ To the folder:
 This will insert all required configurations and database tables for PipraPay to work correctly.
 
 ------------------------------------------------------------
-🔐 STEP 4: Exclude Webhook Route from CSRF Protection
+🔐 STEP 4: Exclude Webhook Route
 ------------------------------------------------------------
-
-To allow webhook calls from PipraPay without CSRF token errors:
 
 1. Open the file:  
 > `app/Http/Middleware/VerifyCsrfToken.php`
@@ -55,5 +53,5 @@ protected $except = [
     '*save-token*',
     '*sort-payment-methods*',
     '*admin/upload/ck/image*',
-    'payment/piprapay/*', // <-- Added for PipraPay webhook
+    'payment/piprapay/*', // <-- Added for PipraPay
 ];
