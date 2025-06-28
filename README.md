@@ -36,9 +36,24 @@ To the folder:
 This will insert all required configurations and database tables for PipraPay to work correctly.
 
 ------------------------------------------------------------
-✅ DONE!
+🔐 STEP 4: Exclude Webhook Route from CSRF Protection
 ------------------------------------------------------------
 
-The PipraPay payment module has now been successfully integrated into your SMM Matrix platform.
+To allow webhook calls from PipraPay without CSRF token errors:
 
-You are ready to process secure and simplified transactions via PipraPay.
+1. Open the file:  
+> `app/Http/Middleware/VerifyCsrfToken.php`
+
+2. Add the following line inside the `$except` array:
+
+```php
+'payment/piprapay/*',
+
+Your updated $except array will look like this:
+
+protected $except = [
+    '*save-token*',
+    '*sort-payment-methods*',
+    '*admin/upload/ck/image*',
+    'payment/piprapay/*', // <-- Added for PipraPay webhook
+];
